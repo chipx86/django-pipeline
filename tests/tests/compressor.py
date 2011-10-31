@@ -50,6 +50,11 @@ class CompressorTest(TestCase):
         relative_path = self.compressor.relative_path('/var/www/static/images/sprite.png')
         self.assertEquals(relative_path, '/images/sprite.png')
 
+    def test_relative_path_without_slash(self):
+        settings.PIPELINE_ROOT = '/var/www/static'
+        relative_path = self.compressor.relative_path('/var/www/static/images/sprite.png')
+        self.assertEquals(relative_path, '/images/sprite.png')
+
     def test_absolute_path(self):
         absolute_path = self.compressor.absolute_path('../../images/sprite.png',
             'css/plugins/gallery.css')
